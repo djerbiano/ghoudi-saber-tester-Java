@@ -18,17 +18,18 @@ import java.util.Date;
         //TODO: Some tests are failing here. Need to check if this logic is correct
 <span class="fc" id="L19">        double duration = (outHour - inHour) / 3_600_000.0;</span>
 
-<span class="pc bpc" id="L21" title="1 of 3 branches missed.">        switch (ticket.getParkingSpot().getParkingType()) {</span>
-            case CAR: {
-<span class="fc" id="L23">                ticket.setPrice(duration * Fare.CAR_RATE_PER_HOUR);</span>
-<span class="fc" id="L24">                break;</span>
-            }
-            case BIKE: {
-<span class="fc" id="L27">                ticket.setPrice(duration * Fare.BIKE_RATE_PER_HOUR);</span>
-<span class="fc" id="L28">                break;</span>
-            }
-<span class="nc" id="L30">            default: throw new IllegalArgumentException(&quot;Unkown Parking Type&quot;);</span>
+        double rate;
+<span class="pc bpc" id="L22" title="1 of 3 branches missed.">        switch (ticket.getParkingSpot().getParkingType()) {</span>
+<span class="fc" id="L23">            case CAR: rate = Fare.CAR_RATE_PER_HOUR; break;</span>
+<span class="fc" id="L24">            case BIKE: rate = Fare.BIKE_RATE_PER_HOUR; break;</span>
+<span class="nc" id="L25">            default: throw new IllegalArgumentException(&quot;Unknown Parking Type&quot;);</span>
         }
-<span class="fc" id="L32">    }</span>
+
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (duration &lt; 0.5) {</span>
+<span class="fc" id="L29">            ticket.setPrice(0);</span>
+        } else {
+<span class="fc" id="L31">            ticket.setPrice(duration * rate);</span>
+        }
+<span class="fc" id="L33">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

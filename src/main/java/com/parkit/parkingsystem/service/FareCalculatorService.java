@@ -3,7 +3,6 @@ package com.parkit.parkingsystem.service;
 import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.model.Ticket;
 
-import java.util.Date;
 
 public class FareCalculatorService {
 
@@ -18,16 +17,17 @@ public class FareCalculatorService {
         //TODO: Some tests are failing here. Need to check if this logic is correct
         double duration = (outHour - inHour) / 3_600_000.0;
 
+        double rate;
         switch (ticket.getParkingSpot().getParkingType()) {
-            case CAR: {
-                ticket.setPrice(duration * Fare.CAR_RATE_PER_HOUR);
-                break;
-            }
-            case BIKE: {
-                ticket.setPrice(duration * Fare.BIKE_RATE_PER_HOUR);
-                break;
-            }
-            default: throw new IllegalArgumentException("Unkown Parking Type");
+            case CAR: rate = Fare.CAR_RATE_PER_HOUR; break;
+            case BIKE: rate = Fare.BIKE_RATE_PER_HOUR; break;
+            default: throw new IllegalArgumentException("Unknown Parking Type");
+        }
+
+        if (duration < 0.5) {
+            ticket.setPrice(0);
+        } else {
+            ticket.setPrice(duration * rate);
         }
     }
 }
