@@ -12,7 +12,7 @@ public class FareCalculatorService {
             throw new IllegalArgumentException("Out time provided is incorrect:" + ticket.getOutTime().toString());
         }
 
-        long inHour = ticket.getInTime().getHours();
+        long inHour = ticket.getInTime().getTime();
         long outHour = ticket.getOutTime().getTime();
 
         //TODO: Some tests are failing here. Need to check if this logic is correct
