@@ -46,7 +46,7 @@ public class ParkingService {
 <span class="fc" id="L46">                ticket.setInTime(inTime);</span>
 <span class="fc" id="L47">                ticket.setOutTime(null);</span>
 <span class="fc" id="L48">                ticketDAO.saveTicket(ticket);</span>
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">                if (knownCustomer &gt; 0) {</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">                if (knownCustomer &gt; 0) {</span>
 <span class="fc" id="L50">                    System.out.println(&quot;Nice to see you again! As a regular user of our parking, you will get a 5% discount&quot;);</span>
                 }
 <span class="fc" id="L52">                System.out.println(&quot;Generated Ticket and saved in DB&quot;);</span>
