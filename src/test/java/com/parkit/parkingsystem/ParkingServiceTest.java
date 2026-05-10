@@ -99,12 +99,21 @@ public class ParkingServiceTest {
     }
 
     @Test
-    public void testGetNextParkingNumberIfAvailableParkingNumberNotFound(){
+    public void testGetNextParkingNumberIfAvailableParkingNumberNotFound() {
         when(inputReaderUtil.readSelection()).thenReturn(1);
         when(parkingSpotDAO.getNextAvailableSlot(any(ParkingType.class))).thenReturn(0);
         ParkingSpot result = parkingService.getNextParkingNumberIfAvailable();
         assertNull(result);
 
     }
+
+    @Test
+    public void testGetNextParkingNumberIfAvailableParkingNumberWrongArgument() {
+        when(inputReaderUtil.readSelection()).thenReturn(3);
+        ParkingSpot result = parkingService.getNextParkingNumberIfAvailable();
+        assertNull(result);
+        verify(parkingSpotDAO, never()).getNextAvailableSlot(any(ParkingType.class));
+    }
+
 
 }
