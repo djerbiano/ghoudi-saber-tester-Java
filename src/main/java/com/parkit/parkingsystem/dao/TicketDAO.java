@@ -108,4 +108,48 @@ public class TicketDAO {
         }
         return count;
     }
+    public boolean updateInTime(Ticket ticket) {
+        Connection con = null;
+        try {
+            con = dataBaseConfig.getConnection();
+            PreparedStatement ps = con.prepareStatement(DBConstants.UPDATE_IN_TIME);
+            ps.setTimestamp(1, new Timestamp(ticket.getInTime().getTime()));
+            ps.setString(2, ticket.getVehicleRegNumber());
+            ps.execute();
+            return true;
+        } catch (Exception ex) {
+            logger.error("Error updating in time", ex);
+        } finally {
+            dataBaseConfig.closeConnection(con);
+        }
+        return false;
+    }
+
+    public Ticket getTicketWithOutTime(String vehicleRegNumber) {
+        Connection con = null;
+        Ticket ticket = null;
+        try {
+            con = dataBaseConfig.getConnection();
+            PreparedStatement ps = con.prepareStatement(DBConstants.GET_TICKET_WITH_OUT_TIME);
+            ps.setString(1, vehicleRegNumber);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                ticket = new Ticket();
+                ParkingSpot parkingSpot = new ParkingSpot(rs.getInt(1), ParkingType.valueOf(rs.getString(6)), false);
+                ticket.setParkingSpot(parkingSpot);
+                ticket.setId(rs.getInt(2));
+                ticket.setVehicleRegNumber(vehicleRegNumber);
+                ticket.setPrice(rs.getDouble(3));
+                ticket.setInTime(rs.getTimestamp(4));
+                ticket.setOutTime(rs.getTimestamp(5));
+            }
+            dataBaseConfig.closeResultSet(rs);
+            dataBaseConfig.closePreparedStatement(ps);
+        } catch (Exception ex) {
+            logger.error("Error fetching ticket", ex);
+        } finally {
+            dataBaseConfig.closeConnection(con);
+            return ticket;
+        }
+    }
 }

@@ -9,4 +9,11 @@ public class DBConstants {
     public static final String UPDATE_TICKET = "update ticket set PRICE=?, OUT_TIME=? where ID=?";
     public static final String GET_TICKET = "select t.PARKING_NUMBER, t.ID, t.PRICE, t.IN_TIME, t.OUT_TIME, p.TYPE from ticket t,parking p where p.parking_number = t.parking_number and t.VEHICLE_REG_NUMBER=? and t.OUT_TIME is null order by t.IN_TIME  limit 1";
     public static final String COUNT_TICKETS = "SELECT COUNT(*) FROM ticket WHERE VEHICLE_REG_NUMBER = ? AND OUT_TIME IS NOT NULL";
+    public static final String UPDATE_IN_TIME = "update ticket set IN_TIME=? where VEHICLE_REG_NUMBER=? and OUT_TIME is null";
+    public static final String GET_TICKET_WITH_OUT_TIME =
+            "select t.PARKING_NUMBER, t.ID, t.PRICE, t.IN_TIME, t.OUT_TIME, p.TYPE " +
+                    "from ticket t, parking p " +
+                    "where p.parking_number = t.parking_number " +
+                    "and t.VEHICLE_REG_NUMBER=? " +
+                    "order by t.ID desc limit 1";  // ID desc = toujours le plus récent
 }

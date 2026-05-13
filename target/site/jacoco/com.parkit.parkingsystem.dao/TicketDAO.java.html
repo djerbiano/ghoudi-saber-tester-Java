@@ -108,5 +108,49 @@ import java.sql.Timestamp;
         }
 <span class="nc" id="L109">        return count;</span>
     }
+    public boolean updateInTime(Ticket ticket) {
+<span class="nc" id="L112">        Connection con = null;</span>
+        try {
+<span class="nc" id="L114">            con = dataBaseConfig.getConnection();</span>
+<span class="nc" id="L115">            PreparedStatement ps = con.prepareStatement(DBConstants.UPDATE_IN_TIME);</span>
+<span class="nc" id="L116">            ps.setTimestamp(1, new Timestamp(ticket.getInTime().getTime()));</span>
+<span class="nc" id="L117">            ps.setString(2, ticket.getVehicleRegNumber());</span>
+<span class="nc" id="L118">            ps.execute();</span>
+<span class="nc" id="L119">            return true;</span>
+<span class="nc" id="L120">        } catch (Exception ex) {</span>
+<span class="nc" id="L121">            logger.error(&quot;Error updating in time&quot;, ex);</span>
+        } finally {
+<span class="nc" id="L123">            dataBaseConfig.closeConnection(con);</span>
+        }
+<span class="nc" id="L125">        return false;</span>
+    }
+
+    public Ticket getTicketWithOutTime(String vehicleRegNumber) {
+<span class="nc" id="L129">        Connection con = null;</span>
+<span class="nc" id="L130">        Ticket ticket = null;</span>
+        try {
+<span class="nc" id="L132">            con = dataBaseConfig.getConnection();</span>
+<span class="nc" id="L133">            PreparedStatement ps = con.prepareStatement(DBConstants.GET_TICKET_WITH_OUT_TIME);</span>
+<span class="nc" id="L134">            ps.setString(1, vehicleRegNumber);</span>
+<span class="nc" id="L135">            ResultSet rs = ps.executeQuery();</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">            if (rs.next()) {</span>
+<span class="nc" id="L137">                ticket = new Ticket();</span>
+<span class="nc" id="L138">                ParkingSpot parkingSpot = new ParkingSpot(rs.getInt(1), ParkingType.valueOf(rs.getString(6)), false);</span>
+<span class="nc" id="L139">                ticket.setParkingSpot(parkingSpot);</span>
+<span class="nc" id="L140">                ticket.setId(rs.getInt(2));</span>
+<span class="nc" id="L141">                ticket.setVehicleRegNumber(vehicleRegNumber);</span>
+<span class="nc" id="L142">                ticket.setPrice(rs.getDouble(3));</span>
+<span class="nc" id="L143">                ticket.setInTime(rs.getTimestamp(4));</span>
+<span class="nc" id="L144">                ticket.setOutTime(rs.getTimestamp(5));</span>
+            }
+<span class="nc" id="L146">            dataBaseConfig.closeResultSet(rs);</span>
+<span class="nc" id="L147">            dataBaseConfig.closePreparedStatement(ps);</span>
+<span class="nc" id="L148">        } catch (Exception ex) {</span>
+<span class="nc" id="L149">            logger.error(&quot;Error fetching ticket&quot;, ex);</span>
+        } finally {
+<span class="nc" id="L151">            dataBaseConfig.closeConnection(con);</span>
+<span class="nc" id="L152">            return ticket;</span>
+        }
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
