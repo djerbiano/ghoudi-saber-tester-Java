@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0.044" tests="11" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.parkit.parkingsystem.dao.TicketDAOTest" time="2.693" tests="15" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -57,15 +57,19 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="calculateFareBikeWithDiscount" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0"/>
-  <testcase name="calculateFareCarWithLessThanOneHourParkingTime" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0"/>
-  <testcase name="calculateFareBikeWithLessThan30minutesParkingTime" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0"/>
-  <testcase name="calculateFareCarWithDiscount" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0"/>
-  <testcase name="calculateFareUnkownType" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0"/>
-  <testcase name="calculateFareCar" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0"/>
-  <testcase name="calculateFareBike" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0.001"/>
-  <testcase name="calculateFareCarWithLessThan30minutesParkingTime" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0"/>
-  <testcase name="calculateFareCarWithMoreThanADayParkingTime" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0"/>
-  <testcase name="calculateFareBikeWithLessThanOneHourParkingTime" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0"/>
-  <testcase name="calculateFareBikeWithFutureInTime" classname="com.parkit.parkingsystem.FareCalculatorServiceTest" time="0.041"/>
+  <testcase name="getTicket_shouldReturnNull_whenTicketDoesNotExist" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="2.527"/>
+  <testcase name="updateInTime_shouldReturnTrue_whenUpdateSucceeds" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.019"/>
+  <testcase name="getTicketWithOutTime_shouldReturnNull_whenTicketDoesNotExist" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.002"/>
+  <testcase name="updateInTime_shouldReturnFalse_whenExceptionOccurs" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.077"/>
+  <testcase name="getNbTicket_shouldReturnCount_whenTicketsExist" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.006"/>
+  <testcase name="saveTicket_shouldReturnFalse_whenExceptionOccurs" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.003"/>
+  <testcase name="getNbTicket_shouldReturnZero_whenExceptionOccurs" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.004"/>
+  <testcase name="updateTicket_shouldReturnTrue_whenUpdateSucceeds" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.002"/>
+  <testcase name="getTicket_shouldReturnNull_whenExceptionOccurs" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.003"/>
+  <testcase name="getTicket_shouldReturnTicket_whenTicketExists" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.008"/>
+  <testcase name="getTicketWithOutTime_shouldReturnTicket_whenTicketExists" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.003"/>
+  <testcase name="getNbTicket_shouldReturnZero_whenNoTicketsExist" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.002"/>
+  <testcase name="updateTicket_shouldReturnFalse_whenExceptionOccurs" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.003"/>
+  <testcase name="getTicketWithOutTime_shouldReturnNull_whenExceptionOccurs" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.003"/>
+  <testcase name="saveTicket_shouldReturnFalse_whenTicketIsSaved" classname="com.parkit.parkingsystem.dao.TicketDAOTest" time="0.001"/>
 </testsuite>
