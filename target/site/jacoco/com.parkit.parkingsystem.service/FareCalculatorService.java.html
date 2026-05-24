@@ -11,11 +11,11 @@ import com.parkit.parkingsystem.model.Ticket;
 <span class="fc" id="L11">            throw new IllegalArgumentException(&quot;Out time provided is incorrect:&quot; + ticket.getOutTime().toString());</span>
         }
 
-<span class="fc" id="L14">        long inHour = ticket.getInTime().getTime();</span>
-<span class="fc" id="L15">        long outHour = ticket.getOutTime().getTime();</span>
+<span class="fc" id="L14">        long inTime = ticket.getInTime().getTime();</span>
+<span class="fc" id="L15">        long outTime = ticket.getOutTime().getTime();</span>
 
         //TODO: Some tests are failing here. Need to check if this logic is correct
-<span class="fc" id="L18">        double duration = (outHour - inHour) / 3_600_000.0;</span>
+<span class="fc" id="L18">        double duration = (outTime - inTime) / 3_600_000.0;</span>
 
         double rate;
 <span class="pc bpc" id="L21" title="1 of 3 branches missed.">        switch (ticket.getParkingSpot().getParkingType()) {</span>
